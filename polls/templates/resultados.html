@@ -1,0 +1,31 @@
+    {% extends "formulario.html" %}
+    {% block body %}    
+    {% if rutas %}
+    <div class="col-md-offset-2 col-md-8 text-center">
+        <h2>Resultados de la búsqueda</h2>
+        <div class="col-md-offset-2 col-md-8 text-center">
+            <p><strong>Desde:</strong> {{origen}} <strong>Hacia:</strong> {{destino}} <strong>{{tipo}} Escalas</strong></p>
+        </div>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Aerol&iacute;nea</th>
+                    <th>Aeropuerto Origen</th>
+                    <th>Aeropuerto Destino</th>
+                    <th>Escalas</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ruta in rutas %}
+                <tr>
+                    <td>{{ruta.airline}}</td>
+                    <td>{{ruta.sAirport}}</td>
+                    <td>{{ruta.dAirport}}</td>
+                    <td>{{ruta.stops}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+    {% endblock %}

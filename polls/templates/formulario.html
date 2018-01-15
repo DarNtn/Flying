@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Flying</title>
+  	{% load static %}
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Flying</h1>
+            <p>¡Tu mejor opción para b&uacute;squeda de vuelos!</p>
+        </div>
+    </div>
+    <div class="container">
+        <form class= "form-horizontal" method="POST" action="{% url 'polls:search' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label class="control-label col-sm-5" for="orig">Origen:</label>
+                <select name="origen" id="orig">
+                {% for airport in airports %}
+                    <option>{{airport.name}}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-5" for="dest">Destino:</label>
+                <select name="destino" id="dest">
+                {% for airport in airports %}
+                    <option>{{airport.name}}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col-md-8">
+                <input type="radio" name="tipo" value="0" checked class="form-check-input"> Vuelo directo
+                <input type="radio" name="tipo" value="1" class="form-check-input"> Vuelo con escalas
+                <br>
+            </div>
+            <div class="form-group col-md-8 centered">
+                <input id="enviar" type="submit" value="Enviar" class="btn btn-primary">
+            </div>
+        </form>
+        {% block body %}{% endblock %}
+    </div>
+
+</body>
+</html>
